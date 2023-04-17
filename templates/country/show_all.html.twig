@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body%}
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2>{{ 'show.Cities of Europe'|trans({}, 'country')}}</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>{{ 'show.City'|trans({}, 'country')}}</td>
+            <td>{{ 'index.Country'|trans({}, 'country')}}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for city in cities %}
+            <tr>
+                <td>
+                    {{ city.cityname }}
+                </td>
+                <td>
+                    {{ city.country.countryname }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <button class="button button" onClick="window.print()">{{ 'index.Print'|trans({}, 'country')}}</button>
+
+{% endblock %}

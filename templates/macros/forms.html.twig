@@ -1,0 +1,35 @@
+{% macro input(name, type, attributes, iconClass) %}
+    <div class="form-outline {% if attributes.class is not empty %}{{ attributes.class }}{% endif %}">
+        <label for="{{ name }}">{{ name|trans({}, 'login')}}</label>
+        {% if iconClass is not empty %}
+            <span><i class="{{ iconClass }}"></i></span>
+        {% endif %}
+
+        <input class="form-control" type="{{ type }}" placeholder="{{ name|trans({}, 'login')}}" name="{{ name }}"
+        {% for key, value in attributes %}
+            {% if key != "class" %}
+                 {{ key }}="{{ value }}"
+            {% endif %}
+        {% endfor %}
+        />
+    </div>
+{% endmacro input %}
+
+{% macro button(type, content, attributes) %}
+    <button class="btn
+        {% if attributes.class is not empty%}
+            {{ attributes.class }}
+        {% endif %} " type="{{ type }}"
+             {% for key, value in attributes %}
+                  {% if key != "class" %}
+                       {{ key }}="{{ value }}"
+                  {% endif %}
+             {% endfor %}
+    >
+    {% if attributes['data-loading'] is defined %}
+        <div class="spinner-border mt-0 d-none" role="status"></div>
+        <br />
+    {% endif %}
+        {{ content }}
+    </button>
+{% endmacro button %}

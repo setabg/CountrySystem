@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% block stylesheets %}
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+{#            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">#}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light main-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="my-auto">
+                    <a class="nav-link" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M0 13C0 6.373 5.373 1 12 1s12 5.373 12 12v8.657a.75.75 0 01-1.5 0V13c0-5.799-4.701-10.5-10.5-10.5S1.5 7.201 1.5 13v8.657a.75.75 0 01-1.5 0V13z"></path><path d="M8 19.75a.75.75 0 01.75-.75h6.5a.75.75 0 010 1.5h-6.5a.75.75 0 01-.75-.75z"></path><path fill-rule="evenodd" d="M5.25 9.5a1.75 1.75 0 00-1.75 1.75v3.5c0 .966.784 1.75 1.75 1.75h13.5a1.75 1.75 0 001.75-1.75v-3.5a1.75 1.75 0 00-1.75-1.75H5.25zm.22 1.47a.75.75 0 011.06 0L9 13.44l2.47-2.47a.75.75 0 011.06 0L15 13.44l2.47-2.47a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0L12 12.56l-2.47 2.47a.75.75 0 01-1.06 0l-3-3a.75.75 0 010-1.06z"></path></svg></a>
+                </li>
+                <li class="my-auto">
+                    <a class="nav-link" href="{{ path('country') }}">{{ 'Country'|trans({}, 'base')}}</a>
+                </li>
+                <li class="my-auto">
+                    <a class="nav-link" href="{{ path('create', {name:'Countries'}) }}">{{ 'Add country'|trans({}, 'base')}}</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0"
+                  action="{{ path('search') }}"
+                  method="GET">
+                <input class="form-control mr-sm-2" type="search"
+                       aria-label="Search"
+                       name="keyword"
+                       value="{{ app.request.query.get('keyword') }}"
+                       required>
+                <input type="submit" value="{{ 'Search'|trans({}, 'base')}}">
+            </form>
+            {% if not app.user %}
+                <a class="nav-link my-auto ml-auto mr-0" href="{{ path('app_login') }}">{{ 'Login'|trans({}, 'base')}}</a>
+                <a class="nav-link my-auto  mr-0" href="{{ path('register') }}">{{ 'Registration'|trans({}, 'base')}}</a>
+            {% else %}
+                <p class="mr-0 ml-auto my-auto">
+                    <a class="nav-link " href="{{ path('app_logout') }}">{{ 'Logout'|trans({}, 'login')}}</a>
+                </p>
+            {% endif %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">{{ 'Choose a language'|trans({}, 'base')}}</button>
+                <div class="dropdown-menu">
+                    <a href="{{ path('app_login', {_locale: 'en'}) }}" class="dropdown-item">en</a>
+                    <a href="{{ path('app_login', {_locale: 'bg'}) }}" class="dropdown-item">bg</a>
+                </div>
+                {% dump %}
+            </div>
+        </nav>
+        <nav class="text-right mt-2 mr-2">
+            <label for="mobile-menu"  style="font-size: 2rem">&#9776;</label>
+            <input type="checkbox" id="mobile-menu" class="d-none text-right">
+            <div class="mobile-nav">
+                <ul class="navbar-nav me-auto">
+                    <li class="my-auto">
+                        <a class="nav-link" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M0 13C0 6.373 5.373 1 12 1s12 5.373 12 12v8.657a.75.75 0 01-1.5 0V13c0-5.799-4.701-10.5-10.5-10.5S1.5 7.201 1.5 13v8.657a.75.75 0 01-1.5 0V13z"></path><path d="M8 19.75a.75.75 0 01.75-.75h6.5a.75.75 0 010 1.5h-6.5a.75.75 0 01-.75-.75z"></path><path fill-rule="evenodd" d="M5.25 9.5a1.75 1.75 0 00-1.75 1.75v3.5c0 .966.784 1.75 1.75 1.75h13.5a1.75 1.75 0 001.75-1.75v-3.5a1.75 1.75 0 00-1.75-1.75H5.25zm.22 1.47a.75.75 0 011.06 0L9 13.44l2.47-2.47a.75.75 0 011.06 0L15 13.44l2.47-2.47a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0L12 12.56l-2.47 2.47a.75.75 0 01-1.06 0l-3-3a.75.75 0 010-1.06z"></path></svg></a>
+                    </li>
+                    <li class="my-auto">
+                        <a class="nav-link" href="{{ path('country') }}">{{ 'Country'|trans({}, 'base')}}</a>
+                    </li>
+                    <li class="my-auto">
+                        <a class="nav-link" href="{{ path('create', {name:'Countries'}) }}">{{ 'Add country'|trans({}, 'base')}}</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-auto w-50 d-inline-block"
+                      action="{{ path('search') }}"
+                      method="GET">
+                    <input class="form-control" type="search"
+                           aria-label="Search"
+                           name="keyword"
+                           value="{{ app.request.query.get('keyword') }}"
+                           required>
+                    <input type="submit" class="mt-2" value="{{ 'Search'|trans({}, 'base')}}">
+                </form>
+                {% if not app.user %}
+                    <a class="nav-link pr-0 my-auto" href="{{ path('app_login') }}">{{ 'Login'|trans({}, 'base')}}</a>
+                    <a class="nav-link pr-0 my-auto" href="{{ path('register') }}">{{ 'Registration'|trans({}, 'base')}}</a>
+                {% else %}
+                    <a class="nav-link pr-0 my-auto" href="{{ path('app_logout') }}">{{ 'Logout'|trans({}, 'login')}}</a>
+                {% endif %}
+                <div class="btn-group dropleft my-auto">
+                    <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ 'Choose a language'|trans({}, 'base')}}</button>
+                    <div class="dropdown-menu my-auto">
+                        <a href="{{ path('app_login', {_locale: 'en'}) }}" class="dropdown-item">EN</a>
+                        <a href="{{ path('app_login', {_locale: 'bg'}) }}" class="dropdown-item">BG</a>
+                    </div>
+                    {% dump %}
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        <div>
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock %}
+        </div>
+    </body>
+</html>

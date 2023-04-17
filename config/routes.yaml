@@ -1,0 +1,82 @@
+app_login:
+    path:
+        en: /
+        bg: /bg
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path:
+        en: /logout
+        bg: /bg/logout
+    controller: App\Controller\SecurityController::logout
+
+register:
+    path:
+        en: /register
+        bg: /bg/register
+    controller: App\Controller\RegistrationController::register
+
+country:
+    path:
+        en: /country
+        bg: /bg/country
+    controller: App\Controller\CountryController::index
+
+create:
+    path:
+        en: /create
+        bg: /bg/create
+    controller: App\Controller\CountryController::create
+
+update:
+    path:
+        en: /update/{id}
+        bg: /bg/update/{id}
+    controller: App\Controller\CountryController::update
+
+show:
+    path:
+        en: /show/{id}
+        bg: /bg/show/{id}
+    controller: App\Controller\CountryController::show
+
+show_all:
+    path:
+        en: /show-all
+        bg: /bg/show-all
+    controller: App\Controller\CountryController::showAll
+
+remove:
+    path:
+        en: /remove/{id}
+        bg: /bg/remove/{id}
+    controller: App\Controller\CountryController::delete
+
+add_city:
+    path:
+        en: /show/{id}/add-city
+        bg: bg/show/{id}/add-city
+    controller: App\Controller\CityController::addCity
+
+#show_city:
+#    path: show/{id}
+#    controller: App\Controller\CityController::showCity
+#
+
+update_city:
+    path:
+        en: update-city/{id}
+        bg: bg/update-city/{id}
+    controller: App\Controller\CityController::updateCity
+
+remove_city:
+    path:
+        en: city/remove-city/{id}
+        bg: bg/city/remove-city/{id}
+    controller: App\Controller\CityController::delete
+
+search:
+    path:
+        en: /search
+        bg: bg/search
+    controller: App\Controller\SearchController::searchCountry

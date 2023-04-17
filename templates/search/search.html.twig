@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body%}
+    {% if countries and cities %}
+<table class="table table-striped">
+    <tbody>
+    {% for country in countries %}
+        <tr>
+            <td>
+                {{ country.countryname }}
+            </td>
+            <td>
+                {{ country.code }}
+            </td>
+            <td>
+                <img src="{{ '/uploads/' ~ country.image }}" alt="">
+            </td>
+        </tr>
+    {% endfor %}
+    {% for city in cities %}
+        <td>
+            {{ city.cityname }}
+        </td>
+        <td>
+            {{ city.country.countryname }}
+        </td>
+    {% endfor %}
+    {% elseif countries %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>{{ 'Name'|trans({}, 'search')}}</td>
+                <td>{{ 'Code'|trans({}, 'search')}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for country in countries %}
+                <tr>
+                    <td>
+                        {{ country.id }}
+                    </td>
+                    <td>
+                        {{ country.countryname }}
+                    </td>
+                    <td>
+                        {{ country.code }}
+                    </td>
+                    <td>
+                        <img style="width:120px;height:80px;" src="{{ '/uploads/' ~ country.image }}" alt="">
+                    </td>
+                </tr>
+                {% endfor %}
+        {% elseif cities %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>{{ 'Name'|trans({}, 'search')}}</td>
+                    <td>{{ 'Country'|trans({}, 'search')}}</td>
+                </tr>
+                </thead>
+                <tbody>
+            {% for city in cities %}
+                <td>
+                    {{ city.id }}
+                </td>
+                <td>
+                    {{ city.cityname }}
+                </td>
+                <td>
+                    {{ city.country.countryname }}
+                </td>
+            {% endfor %}
+
+        {% else %}
+            <h2>{{ 'No result'|trans({}, 'search')}}</h2>
+        {% endif %}
+    <hr>
+    <button class="button button" onClick="window.print()">{{ 'index.Print'|trans({}, 'country')}}</button>
+{% endblock %}

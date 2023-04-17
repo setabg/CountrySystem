@@ -1,0 +1,9 @@
+{% extends('base.html.twig')  %}
+{% block body%}
+    <h1>{{ city.cityname }}</h1>
+    <hr>
+    <form action="{{ path('remove_city', {id: city.id}) }}" method="post">
+        <p>{{ 'delete.Are you sure you want to delete this city?'|trans({}, 'city')}}</p>
+        <button class="btn btn-danger">{{ 'delete.Delete!'|trans({}, 'city')}}</button>
+    </form>
+{% endblock %}

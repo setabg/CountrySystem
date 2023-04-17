@@ -1,0 +1,34 @@
+.container-narrow {
+  max-width: 300px;
+  box-shadow: 0 0 12px 4px rgba(148,133,132,0.48);
+}
+
+@media screen and (min-width: 480px) {
+  .main-nav {
+    display: flex;
+  }
+  label[for=mobile-menu] {
+    display: none;
+  }
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #mobile-menu {
+    display: inline-block;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  #mobile-menu:checked ~ .mobile-nav {
+    display: block;
+  }
+}

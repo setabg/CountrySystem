@@ -1,0 +1,51 @@
+{% extends('base.html.twig')  %}
+
+{% block body%}
+    <h1>{{ country.countryname }}</h1>
+    <hr>
+<img style="width:120px;height:80px;" src="{{ '/uploads/' ~ country.image }}" alt="">
+    <hr>
+    <a class="text" href="{{ path('add_city', {id: country.id}) }}">
+        <button class="button button">{{ 'show.Add City'|trans({}, 'country')}}</button>
+    </a>
+    <hr>
+    <h1>{{ 'show.Cities in'|trans({}, 'country')}} {{ country.countryname }}</h1>
+    {% if cities %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+
+                <td>id</td>
+                <td>{{ 'show.City'|trans({}, 'country')}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for city in cities %}
+                <tr>
+                    <td>
+                        {{ city.id }}
+                    </td>
+                    <td>
+                        {{ city.cityname }}
+                    </td>
+                    <td>
+                        <a class="text-success" href="{{ path('update_city', {id: city.id}) }}">
+                            <button class="button button2">{{ 'index.Edit'|trans({}, 'country')}}</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="{{ path('remove_city', {id: city.id}) }}">
+                            <button class="button button3">{{ 'index.Delete'|trans({}, 'country')}}</button>
+                        </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <hr>
+    <button class="button button" onClick="window.print()">{{ 'index.Print'|trans({}, 'country')}}</button>
+{% endblock %}
